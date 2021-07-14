@@ -9,7 +9,7 @@ async def homepage(request):
 
 routes = [
     Route('/', homepage),
-    Mount('/static', StaticFiles(directory="python-with-oleg")),
+    Mount('/static', StaticFiles(directory=".")),
 ]
 
 app = Starlette(debug=True, routes=routes)
