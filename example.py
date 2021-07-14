@@ -4,7 +4,7 @@ from starlette.routing import Route, Mount
 from starlette.staticfiles import StaticFiles
 
 
-def homepage(request):
+async def homepage(request):
     return PlainTextResponse('This is the main page.')
 
 routes = [
