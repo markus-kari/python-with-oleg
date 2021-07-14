@@ -1,5 +1,5 @@
 from starlette.applications import Starlette
-from starlette.responses import HTMLResponse, PlainTextResponse
+from starlette.responses import HTMLResponse, PlainTextResponse, FileResponse
 from starlette.routing import Route, Mount
 from starlette.staticfiles import StaticFiles
 
@@ -30,10 +30,14 @@ async def login(request):
 
     return PlainTextResponse("nothing is happening yet")
 
+# async def favicon(request):
+#     return FileResponse('static/assets/favicon.ico')
+
 routes = [
     Route('/', homepage),
     Route('/login', login),
-    Mount('/', StaticFiles(directory="static"), name="static"),
+    # Route('/favicon.ico', favicon),
+    Mount('/', StaticFiles(directory="static/assets")),
 ]
 
 app = Starlette(debug=True, routes=routes)
