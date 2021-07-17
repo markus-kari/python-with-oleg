@@ -23,20 +23,24 @@ async def homepage(request):
     return HTMLResponse(login_html, media_type='text/html')
 
 async def login(request):
-    print(request.query_params.get("username"))
-    print(request.query_params.get("password"))
+    username = request.query_params.get("username")
+    password = request.query_params.get("password")
 
-    open("login.temp", "wt").write("hallo") # write file
+    if username == 'markus' and password == 'oleg':
+        open("login.temp", "wt").write("logged in") # write file
+        return HTMLResponse(success_html, media_type='text/html')
+    
+    else:
+        return HTMLResponse(fail_html, media_type='text/html')
 
-    return PlainTextResponse("nothing is happening yet")
-
-# async def favicon(request):
-#     return FileResponse('static/assets/favicon.ico')
+async def index(request):
+    return HTMLResponse(index_html, media_type='text/html') 
 
 routes = [
     Route('/', homepage),
     Route('/login', login),
-    # Route('/favicon.ico', favicon),
+    Route('/login.html', homepage),
+    Route('/index.html', index),
     Mount('/', StaticFiles(directory="static/assets")),
 ]
 
